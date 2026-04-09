@@ -17,7 +17,9 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> manejarValidacion(MethodArgumentNotValidException ex) {
+
         Map<String, String> detalles = new HashMap<>();
+
         for (FieldError error : ex.getBindingResult().getFieldErrors()) {
             detalles.put(error.getField(), error.getDefaultMessage());
         }
@@ -32,42 +34,29 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponse> manejarReglaDeNegocio(IllegalArgumentException ex) {
+
+        ErrorResponse body = new ErrorResponse(
+                "BUSINESS_RULE_ERROR",
+                ex.getMessage(),
+                Instant.now(),
+                Map.of()
+        );
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> manejarGenerica(Exception ex) {
+
         ErrorResponse body = new ErrorResponse(
                 "INTERNAL_ERROR",
                 "Ocurrio un error interno",
                 Instant.now(),
                 Map.of()
         );
+
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body);
     }
-    
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ErrorResponse> manejarReglaDeNegocio(IllegalArgumentException ex) {
-        ErrorResponse body = new ErrorResponse(
-                "BUSINESS_RULE_ERROR",
-                ex.getMessage(),
-                Instant.now(),
-                Map.of()
-        );
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
-    }
-
-    /*
-    PASO 5 (EJERCICIO):
-    Descomenta y adapta este manejador cuando agregues validaciones propias
-    en el servicio, por ejemplo IllegalArgumentException.
-
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ErrorResponse> manejarReglaDeNegocio(IllegalArgumentException ex) {
-        ErrorResponse body = new ErrorResponse(
-                "BUSINESS_RULE_ERROR",
-                ex.getMessage(),
-                Instant.now(),
-                Map.of()
-        );
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
-    }
-    */
 }
