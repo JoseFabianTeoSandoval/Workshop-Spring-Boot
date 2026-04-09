@@ -223,6 +223,31 @@ Donde:
 
 ---
 
+## Demo adicional: Singleton vs no singleton
+
+Esta comparacion ya esta implementada en el proyecto para demostracion en clase.
+
+### Caso singleton (con `@Service`)
+
+```bash
+curl -X POST http://localhost:8080/api/v1/demo/estado/singleton/reset
+curl -X POST http://localhost:8080/api/v1/demo/estado/singleton/25
+curl http://localhost:8080/api/v1/demo/estado/singleton
+```
+
+En la segunda llamada se mantiene el valor (`25`), porque Spring reutiliza la misma instancia.
+
+### Caso manual (sin `@Service`, usando `new`)
+
+```bash
+curl -X POST http://localhost:8080/api/v1/demo/estado/manual/25
+curl http://localhost:8080/api/v1/demo/estado/manual
+```
+
+La consulta devuelve `0`, porque cada endpoint crea una instancia nueva.
+
+---
+
 ## Checklist final
 
 - [✔] Proyecto corre en local
