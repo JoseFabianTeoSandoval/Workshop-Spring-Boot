@@ -252,6 +252,28 @@ Se completaron todos los pasos del taller:
 
 ---
 
+## Tecnologías utilizadas
+
+- Java 17
+- Spring Boot 3
+- Maven
+- Swagger / OpenAPI
+- JUnit 5
+
+## Arquitectura
+
+El proyecto sigue una arquitectura en capas:
+
+Controller → Service → DTO → Exception Handler
+
+## Manejo de errores
+
+Se implementó un manejador global de excepciones que retorna:
+
+- VALIDATION_ERROR
+- BUSINESS_RULE_ERROR
+- INTERNAL_ERROR
+
 ## Endpoint de simulación de préstamo
 
 POST /api/v1/simulaciones/prestamo
