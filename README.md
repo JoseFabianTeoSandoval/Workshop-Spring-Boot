@@ -225,13 +225,77 @@ Donde:
 
 ## Checklist final
 
-- [ ] Proyecto corre en local
-- [ ] GET `/api/v1` responde OK
-- [ ] GET `/api/v1/saludos` habilitado
-- [ ] POST `/api/v1/saludos` habilitado y validando
-- [ ] Reglas de negocio implementadas
-- [ ] Manejo de errores de negocio implementado
-- [ ] Swagger/OpenAPI habilitado y accesible
-- [ ] Endpoint nuevo implementado
-- [ ] Tests del endpoint nuevo en verde
-- [ ] Pruebas pasando (`mvn test`)
+- [✔] Proyecto corre en local
+- [✔] GET `/api/v1` responde OK
+- [✔] GET `/api/v1/saludos` habilitado
+- [✔] POST `/api/v1/saludos` habilitado y validando
+- [✔] Reglas de negocio implementadas
+- [✔] Manejo de errores de negocio implementado
+- [✔] Swagger/OpenAPI habilitado y accesible
+- [✔] Endpoint nuevo implementado
+- [✔] Tests del endpoint nuevo en verde
+- [✔] Pruebas pasando (`mvn test`)
+
+---
+
+## Implementación realizada
+
+Se completaron todos los pasos del taller:
+
+- ✔ Endpoint GET /api/v1 funcionando
+- ✔ Endpoint GET /api/v1/saludos habilitado
+- ✔ Endpoint POST /api/v1/saludos con validaciones
+- ✔ Normalización de nombre implementada
+- ✔ Manejo global de errores implementado
+- ✔ Swagger/OpenAPI configurado y funcional
+- ✔ Endpoint adicional: simulador de préstamo
+
+---
+
+## Endpoint de simulación de préstamo
+
+POST /api/v1/simulaciones/prestamo
+
+### Ejemplo request:
+
+json
+{
+  "monto": 10000,
+  "tasaAnual": 12,
+  "meses": 12
+}
+
+### Ejemplo response:
+{
+  "cuotaMensual": 888.48,
+  "interesTotal": 661.85,
+  "totalPagar": 10661.85
+}
+
+### Pruebas
+
+Se implementaron pruebas para los endpoints:
+
+✔ GET /api/v1/saludos
+✔ POST /api/v1/saludos (caso válido e inválido)
+✔ POST /api/v1/simulaciones/prestamo (caso válido e inválido)
+
+### Ejecución de pruebas:
+
+mvn test
+
+Resultado:
+
+✔ Tests ejecutados correctamente
+✔ Sin errores
+ Swagger / OpenAPI
+
+La documentación interactiva está disponible en:
+
+http://localhost:8080/swagger-ui/index.html
+
+### Notas finales
+Se respetó la arquitectura propuesta (controller, service, dto, exception)
+Se aplicaron buenas prácticas de validación y manejo de errores
+El proyecto compila y ejecuta correctamente sin errores
+Todos los endpoints fueron probados con Swagger y curl
